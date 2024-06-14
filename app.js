@@ -1,9 +1,8 @@
-require('dotenv').config();
+/*require('dotenv').config();
 
 const express = require('express');
 const path = require('path');
 const expressLayout = require('express-ejs-layouts');
-
 const connectDB = require('./server/routes/config/db');
 
 const app = express();
@@ -15,26 +14,62 @@ connectDB();
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 //Templating Engine
 app.use(expressLayout);
 app.set('view engine', 'ejs');
+app.set('layout','./layouts/main' );
+app.set('views',path.join(__dirname, 'views'));
 
 
-const layoutPath = './layouts/main';
-app.set('layout', layoutPath);
+//const layoutPath = './layouts/main';
+//app.set('layout', layoutPath);
 
 
-const viewsPath = path.join(__dirname, 'views');
-app.set('views', path.join(__dirname, 'views'));
-app.set('views', viewsPath);
+//const viewsPath = path.join(__dirname, 'views');
+//app.set('views', path.join(__dirname, 'views'));
+//app.set('views', viewsPath);
 
-app.use('/', require('./server/routes/main'));
+//Routen
+
+//const mainRoutes = 
+const mainRoutes = require('./server/routes/main'); 
+
+app.use('/',mainRoutes);
 
 
 app.listen(PORT, ()=> {
     console.log('App listening on port ${PORT}');
 });
 
+//require('dotenv').config();
+
+*/
+
 require('dotenv').config();
+const express = require('express');
+const path = require('path');
+const expressLayout = require('express-ejs-layouts');
+const connectDB = require('./server/routes/config/db');
 
+const app = express();
+const PORT = process.env.PORT || 5001;  // Korrigiere die PORT-Variable
 
+// Verbinde zur Datenbank
+connectDB();
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Templating Engine
+app.use(expressLayout);
+app.set('view engine', 'ejs');
+app.set('layout', './layouts/main');
+app.set('views', path.join(__dirname, 'views'));
+
+// Routen
+const mainRoutes = require('./server/routes/main'); // Importiere den Router
+app.use('/', mainRoutes);  // Verwende den importierten Router
+
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+});
