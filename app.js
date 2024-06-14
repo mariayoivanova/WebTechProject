@@ -67,8 +67,8 @@ app.set('layout', './layouts/main');
 app.set('views', path.join(__dirname, 'views'));
 
 // Routen
-const mainRoutes = require('./server/routes/main'); // Importiere den Router
-app.use('/', mainRoutes);  // Verwende den importierten Router
+const postRoutes = require('./server/routes/postRoutes'); // Importiere den Router für CRUD-Operationen
+app.use('/', postRoutes); // Verwende den importierten Router
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
