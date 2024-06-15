@@ -15,7 +15,12 @@ exports.createPost = async (req, res) => {
 exports.getPosts = async (req, res) => {
     try {
         const posts = await Post.find({});
-        res.render('index', { title: 'My Blog', description: 'Blog useful for everyone', posts });
+        res.render('index', { 
+            title: 'My Blog', 
+            description: 'Blog useful for everyone', 
+            posts: posts,
+            //nextPage: null // Falls du die Seitenpaginierung implementiert hast
+        })
     } catch (e) {
         res.status(500).send(e);
     }
@@ -23,11 +28,12 @@ exports.getPosts = async (req, res) => {
 
 exports.getPost = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id);
-        if (!post) {
-            return res.status(404).send();
-        }
-        res.status(200).send(post);
+        res.render('index', { 
+            title: 'My Blog', 
+            description: 'Blog useful for everyone', 
+            posts: posts, // Die Daten als "posts" übergeben
+            nextPage: null // Falls du die Seitenpaginierung implementiert hast
+        });
     } catch (e) {
         res.status(500).send(e);
     }

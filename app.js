@@ -66,9 +66,10 @@ app.set('view engine', 'ejs');
 app.set('layout', './layouts/main');
 app.set('views', path.join(__dirname, 'views'));
 
-// Routen
+ //Routen
 const postRoutes = require('./server/routes/postRoutes'); // Importiere den Router für CRUD-Operationen
 app.use('/', postRoutes); // Verwende den importierten Router
+
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
