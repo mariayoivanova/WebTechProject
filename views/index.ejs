@@ -18,20 +18,31 @@
         <h2 class="articles__heading">Latest Posts</h2>
 
         <ul class="article-ul">
-            
-            <% posts.forEach(post => { %>
+
+            <% if (posts && posts.length > 0) { %>
+                <% posts.forEach(post => { %>
                 <li>
                     <a href="/post/<%= post._id %>">
                         <span><%= post.title %></span>
                         <% if (post.createdAt) { %>
-                            <span class="article-list__date"><%= post.createdAt.toDateString() %></span>
+                            <span class="article-list__date"><%= new Date(post.createdAt).toDateString() %></span>
                         <% } else { %>
                             <span class="article-list__date">No date available</span>
                         <% } %>
                     </a>
                 </li>
             <% }) %>
+
+            <% } else { %>
+                <li>No posts available</li>
+            <% } %>
         </ul>
+
+        <% if (nextPage) { %>
+            <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
+        <% } else { %>
+            <p>No more pages to display.</p>
+            <% } %>
     </section>
 </body>
 </html>

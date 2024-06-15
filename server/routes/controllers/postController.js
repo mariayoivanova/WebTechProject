@@ -14,12 +14,26 @@ exports.createPost = async (req, res) => {
 // Read
 exports.getPosts = async (req, res) => {
     try {
-        const posts = await Post.find({});
+        const perPage = 5; // Number of posts per page
+        const page = parseInt(req.query.page) || 1; // Current page number (default: 1)
+
+        const posts = await Post.find()
+            .sort({ createdAt: -1 }) // Sort posts by createdAt descending
+            .skip((page - 1) * perPage) // Skip posts that are before the current page
+            .limit(perPage); // Limit the number of posts per page
+
+        const count = await Post.countDocuments(); // Total number of posts
+
+        // Calculate pagination values
+        const hasNextPage = (page * perPage) < count; // Check if there's a next page
+        const nextPage = hasNextPage ? page + 1 : null; // Next page number
+
         res.render('index', { 
             title: 'My Blog', 
             description: 'Blog useful for everyone', 
             posts: posts,
-            //nextPage: null // Falls du die Seitenpaginierung implementiert hast
+            current: page,
+            nextPage: nextPage // Falls du die Seitenpaginierung implementiert hast
         })
     } catch (e) {
         res.status(500).send(e);
