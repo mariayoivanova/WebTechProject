@@ -1,53 +1,4 @@
-/**const express = require('express');
-const router = express.Router();
-const Post = require('../models/Post');
-const fs = require('fs');
 
-
- * Get/
- * HOME
- 
-
-//Routes
-router.get('', async (req, res) => {  // Markiere die Funktion als async
-
-    const locals = {
-        title: "Blog",  
-        description: "Blog useful for everyone"  
-    }
-
-    try {
-        const data = await Post.find();
-        res.render('index', { locals, data });
-    } catch (error) {
-        console.log(error);
-        res.status(500).send("An error occurred");
-    }
-});
-
-// Funktion um Daten einzufügen
-async function insertPostData() {  // Markiere die Funktion als async
-    try {
-        await Post.insertMany([
-            {
-                title: "Building a Blog",
-                body: "This is the body text (test)"
-            }
-        ]);
-        console.log("Post data inserted");
-    } catch (error) {
-        console.log("Error inserting post data:", error);
-    }
-}
-
-insertPostData();  // Rufe die Funktion auf
-
-// About Route
-router.get('/about', (req, res) => {
-    res.render('about');
-});
-
-module.exports = router;  */
 const express = require('express');
 const router = express.Router();
 const path = require('path'); // Füge path-Modul hinzu
@@ -87,7 +38,12 @@ router.get('', async (req, res) => {
   }
 });
 
-// Funktion um Daten einzufügen
+
+
+
+
+
+//Funktion um Daten einzufügen
 async function insertPostData() {  // Markiere die Funktion als async
   try {
     await Post.insertMany([
@@ -102,7 +58,8 @@ async function insertPostData() {  // Markiere die Funktion als async
   }
 }
 
-insertPostData();  // Rufe die Funktion auf
+
+
 
 // About Route
 router.get('/about', (req, res) => {
