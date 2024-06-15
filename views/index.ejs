@@ -37,12 +37,22 @@
                 <li>No posts available</li>
             <% } %>
         </ul>
+        
+        <div class="pagination">
+       
 
         <% if (nextPage) { %>
             <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
         <% } else { %>
-            <p>No more pages to display.</p>
+            <p>No more newer pages to display.</p>
+            <% } %> 
+            
+        <% if (prevPage) { %>
+            <a href="/?page=<%= prevPage %>">Newer Posts</a>
+        <% } else { %>
+            <p>No more newer pages.</p>
             <% } %>
+        </div>
     </section>
 </body>
 </html>

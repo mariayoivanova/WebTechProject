@@ -14,7 +14,7 @@ exports.createPost = async (req, res) => {
 // Read
 exports.getPosts = async (req, res) => {
     try {
-        const perPage = 5; // Number of posts per page
+        const perPage = 3; // Number of posts per page
         const page = parseInt(req.query.page) || 1; // Current page number (default: 1)
 
         const posts = await Post.find()
@@ -26,14 +26,18 @@ exports.getPosts = async (req, res) => {
 
         // Calculate pagination values
         const hasNextPage = (page * perPage) < count; // Check if there's a next page
-        const nextPage = hasNextPage ? page + 1 : null; // Next page number
+        const hasPrevPage = page > 1; // Check if there's a previous page
+        const nextPage = hasNextPage ? page + 1 : null;
+        const prevPage = hasPrevPage ? page - 1 : null;
 
         res.render('index', { 
             title: 'My Blog', 
             description: 'Blog useful for everyone', 
             posts: posts,
-            current: page,
-            nextPage: nextPage // Falls du die Seitenpaginierung implementiert hast
+            currentPage: page,
+            nextPage: nextPage, // Falls du die Seitenpaginierung implementiert hast
+            prevPage: prevPage      
+            
         })
     } catch (e) {
         res.status(500).send(e);
@@ -41,15 +45,19 @@ exports.getPosts = async (req, res) => {
 };
 
 exports.getPost = async (req, res) => {
+    const postId = req.params.id;
     try {
-        res.render('index', { 
-            title: 'My Blog', 
-            description: 'Blog useful for everyone', 
-            posts: posts, // Die Daten als "posts" übergeben
-            nextPage: null // Falls du die Seitenpaginierung implementiert hast
+        const post = await Post.findById(postId); // Find post by ID in MongoDB
+        if (!post) {
+            return res.status(404).send('Post not found');
+        }
+        res.render('postDetail', {
+            title: post.title,
+            post: post
         });
-    } catch (e) {
-        res.status(500).send(e);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching post');
     }
 };
 
