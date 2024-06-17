@@ -58,6 +58,9 @@ const PORT = process.env.PORT || 5001;  // Korrigiere die PORT-Variable
 // Verbinde zur Datenbank
 connectDB();
 
+app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Templating Engine
