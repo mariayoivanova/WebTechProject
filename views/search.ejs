@@ -1,0 +1,30 @@
+<!-- views/partials/search.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= locals.title %></title>
+</head>
+<body>
+    <h1>Search Results</h1>
+
+    <% if (posts.length > 0) { %>
+        <ul class="article-ul">
+            <% posts.forEach(post => { %>
+                <li>
+                    <a href="/post/<%= post._id %>">
+                        <span><%= post.title %></span>
+                    </a>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>No results found.</p>
+    <% } %>
+
+    <p><%= locals.description %></p>
+    <p><a href="<%= currentRoute %>">Back to Home</a></p>
+</body>
+</html>
