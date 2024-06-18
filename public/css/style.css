@@ -103,14 +103,14 @@ border-radius: var(--border-radius);
     }
 }
 
-.header__Logo{
+.header__logo{
     grid-area: logo;
     font-weight: 800;
     font-size: 25px;
     text-decoration: none;
 }
 
-.header__Logo:hover{
+.header__logo:hover{
     text-decoration: underline;
 }
 
