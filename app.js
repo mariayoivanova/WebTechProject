@@ -71,8 +71,9 @@ app.set('views', path.join(__dirname, 'views'));
 
  //Routen
 const postRoutes = require('./server/routes/postRoutes'); // Importiere den Router für CRUD-Operationen
+const adminRoutes = require('./server/routes/adminRoutes');
 app.use('/', postRoutes); // Verwende den importierten Router
-
+app.use('/admin', adminRoutes);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
