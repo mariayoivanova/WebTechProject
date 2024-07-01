@@ -17,7 +17,7 @@ body{
     font-family: "Playfair Display", serif;
     color: var(--black);
     font-size: var(--font-size-base);
-    background-color: #faf5ee;
+    background-color: #c0c0c0;
     margin: 0;
 }
 
@@ -56,9 +56,14 @@ textarea{
     background-color: var(--red);
 }
 
-img{
-    width: 100%;
+.image {
+    max-width: 50%; /* Set to 50% of the container width */
     height: auto;
+    display: block;
+    margin: 20px auto; /* Add margin for spacing */
+    border: 5px solid var(--black) !important; /* Add a thicker black border and ensure it is black */
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25); /* Add a shadow */
 }
 
 /*Layout*/
@@ -70,6 +75,7 @@ img{
 
 .main{
     padding: 20px 0;
+    text-align: center;
 }
 
 /*image style
@@ -81,6 +87,78 @@ border-radius: var(--border-radius);
 }
 
 */
+
+.centered-heading {
+    text-align: center;
+    position: relative;
+    margin: 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centered-heading h1 {
+    display: inline-block;
+    padding: 0 20px;
+    font-size: 2.5rem; 
+    font-weight: bold;
+    font-family: 'Playfair Display', serif; 
+}
+
+.centered-heading::before,
+.centered-heading::after {
+    content: '';
+    flex-grow: 1;
+    height: 2px;
+    background: #080808; /* Passe die Farbe nach Bedarf an */
+    margin: 0 20px;
+}
+/* Container padding to reduce the side margin */
+.container {
+    max-width: 982px;
+    margin: 0 auto;
+    padding: 0 20px; /* Reduziere den Abstand von den Seiten */
+}
+
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0; /* Adjust margin as needed */
+    position: relative;
+}
+
+.section-heading h1 {
+    font-size: 3rem; /* Adjust font size as needed */
+    font-weight: bold;
+    margin: 0 20px;
+    font-family: 'Playfair Display', serif; /* Ensure the font is imported */
+}
+
+.section-heading::before,
+.section-heading::after {
+    content: '';
+    flex: 1;
+    border-bottom: 2px solid var(--black); /* Adjust line color and thickness as needed */
+    margin: 0 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .section-heading {
+        flex-direction: column;
+    }
+
+    .section-heading::before,
+    .section-heading::after {
+        display: none;
+    }
+
+    .section-heading h1 {
+        margin: 20px 0;
+    }
+}
+
 
 .header{
     display: grid;
@@ -292,6 +370,42 @@ border-radius: var(--border-radius);
     padding: 15px;
 }
 
+/* Dropdown menu */
+.header__nav .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.header__nav .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--black);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.header__nav .dropdown-content a {
+    color: var(--gray-light);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.header__nav .dropdown-content a:hover {
+    background-color: var(--gray);
+}
+
+.header__nav .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.header__nav .dropdown:hover .Fashion {
+    background-color: var(--gray-light);
+    color: var(--black);
+}
+
+
 /* Admin dashboard*/
 
 .admin-titel{
@@ -327,3 +441,31 @@ border-radius: var(--border-radius);
 }
 
 
+/* CSS für die Subscribe-Seite */
+.subscribe-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.subscribe-container form {
+    margin-top: 20px;
+}
+
+.subscribe-container label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.subscribe-container input[type="text"],
+.subscribe-container input[type="email"] {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.subscribe-container .btn {
+    padding: 10px 20px;
+}
