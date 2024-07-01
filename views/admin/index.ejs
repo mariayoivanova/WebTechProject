@@ -1,26 +1,57 @@
-<h3>Sign In</h3>
-
-<form action="/admin" method="POST">
-
-    <label for="username"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username">
-
-    <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <input type="submit" value="Login" class="btn">
+    <title><%= title %></title>
+    <meta name = "description" content = "<%= description %>">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" defer src="/js/script.js"></script>
+</head>
+<body>
+    <%- include('../partials/search.ejs') %>
+    <div class="container">
+        <%- include('../partials/header.ejs') %>
+        <main class="main">
+            <div class="author">
+                <h1 class="author__header">Hi, I am ...</h1>
+                <p class="author__body">Description of the blogger</p>
+            </div>
 
-</form>
+            <img src="/img/" alt="description of the image" class="image" width="" height="">
 
-<h3>Register</h3>
-<form action="/register" method="POST">
+            <section class="articles">
+                <h2 class="articles__heading">Latest Posts</h2>
 
-    <label for="username"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username">
+                <ul class="article-ul">
+                    <% posts.forEach(post => { %>
+                        <li>
+                            <a href="/post/<%= post._id %>">
+                                <span><%= post.title %></span>
+                                <% if (post.createdAt) { %>
+                                    <span class="article-list__date"><%= post.createdAt.toDateString() %></span>
+                                <% } else { %>
+                                    <span class="article-list__date">No date available</span>
+                                <% } %>
+                            </a>
+                        </li>
+                    <% }) %>
+                </ul>
 
-    <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password">
-    
-    <input type="submit" value="Register" class="btn">
+                <% if (nextPage) { %>
+                    <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
+                <% } else { %>
+                    <p>No more newer pages to display.</p>
+                <% } %>
 
-</form>
+                <% if (prevPage) { %>
+                    <a href="/?page=<%= prevPage %>" class="pagination">&lt; View Newer Posts</a>
+                <% } %>
+            </section>
+        </main>
+        <%- include('../partials/footer.ejs') %>
+    </div>
+</body>
+</html>

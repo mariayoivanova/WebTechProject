@@ -35,15 +35,15 @@ exports.getPosts = async (req, res) => {
             description: 'Blog useful for everyone', 
             posts: posts,
             currentPage: page,
-            nextPage: nextPage, // Falls du die Seitenpaginierung implementiert hast
+            nextPage: nextPage, 
             prevPage: prevPage      
-            
-        })
+        });
     } catch (e) {
         res.status(500).send(e);
     }
 };
 
+// Read single post
 exports.getPost = async (req, res) => {
     const postId = req.params.id;
     try {
