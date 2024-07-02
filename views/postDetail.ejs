@@ -4,11 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+    <title><%= post.title %></title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your external CSS file -->
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1><%= post.title %></h1>
-    <p><%= post.body %></p>
-    <p><%= post.createdAt.toDateString() %></p>
+    <div class="post">
+        <h1><%= post.title %></h1>
+        <img src="<%= post.imageUrl %>" alt="Image related to <%= post.title %>">
+        <div class="article-content">
+            <% 
+                // Split the body text into paragraphs based on new lines (\n)
+                const paragraphs = post.body.split('\n');
+                // Iterate over each paragraph
+                paragraphs.forEach((paragraph, index) => {
+                    %><p><%
+                    // Split each paragraph into segments based on '**'
+                    const segments = paragraph.split('**');
+                    // Iterate over segments and apply bold tags to segments enclosed in '**'
+                    segments.forEach((segment, segIndex) => {
+                        if (segIndex % 2 === 1) {
+                            %><strong><%= segment %></strong><%
+                        } else {
+                            %><%= segment %><%
+                        }
+                    });
+                    %></p><%
+                });
+            %>
+        </div>
+        <p class="date">Published on <%= post.createdAt.toDateString() %></p>
+    </div>
 </body>
 </html>
