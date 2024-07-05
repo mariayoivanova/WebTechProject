@@ -261,7 +261,7 @@ border-radius: var(--border-radius);
 
 /*Home Article List*/
 .article__heading{
-    margin-top: 2rem;
+    margin-top: 4rem;
     font-weight: 400;
 }
 
@@ -500,5 +500,33 @@ border-radius: var(--border-radius);
     font-size: 0.9em;
     color: #777;
     text-align: right;
+}
+
+.photo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.photo-card {
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.photo-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.photo-card p {
+    margin: 10px 0 0;
+    color: var(--black);
 }
 
