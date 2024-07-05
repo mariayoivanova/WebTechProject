@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/styles.css">
+    <title>Photo Gallery</title>
+</head>
+<body>
+    <div class="container">
+        <div class="centered-heading">
+            <h1>Photo Gallery</h1>
+        </div>
+        <div class="photo-grid">
+            <% photos.forEach(photo => { %>
+                <div class="photo-card">
+                    <img class="image" src="<%= photo.url %>" alt="Photo">
+                    <p><%= photo.description %></p>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>
