@@ -1,30 +1,44 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root{
+:root {
     --black: #1c1c1c;
     --gray: #7e7e7e;
     --gray-light: #e4e4e4;
     --red: #b30000;
+    --pink: #ff007f;
+    --yellow: #fffc3a;
+    --orange: #fd7e14;
     --font-size-base: 1rem;
     --font-size-md: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
     --font-size-lg: clamp(1.56rem, 1vw + 1.31rem, 2.11rem);
     --font-size-xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
     --border-radius: 10px;
+    --header-bg-color: rgba(255, 255, 255, 0.8);
+    --header-text-color: #1c1c1c;
+    --link-hover-color: #fd7e14;
+    --btn-primary-bg: var(--pink);
+    --btn-primary-text: white;
+    --btn-primary-hover-bg: var(--yellow);
+    --btn-delete-bg: var(--red);
+    --body-bg: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+    --post-bg: #ffffff;
+    --post-border: #dee2e6;
+    --post-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 
 body{
     font-family:"Raleway", sans-serif;
     color: var(--black);
     font-size: var(--font-size-base);
-    background-color: #c0c0c0;
+    background-color: var(--body-bg);
     margin: 0;
 }
 
 a{ color: var(--black);}
-h1{font-size: var(--font-size-xl);}
-h2{font-size: var(--font-size-lg);}
-h3{font-size: var(--font-size-md);}
+h1{font-size: var(--font-size-xl); color: var(--orange);}
+h2{font-size: var(--font-size-lg);color: var(--pink);}
+h3{font-size: var(--font-size-md); color: var(--yellow);}
 h4{font-size: var(--font-size-s);}
 
 input[type="text"],
@@ -104,6 +118,7 @@ border-radius: var(--border-radius);
     font-size: 2.5rem; 
     font-weight: bold;
     font-family: 'Raleway', sans-serif; 
+    color: var(--pink);
 }
 
 .centered-heading::before,
@@ -135,6 +150,7 @@ border-radius: var(--border-radius);
     font-weight: bold;
     margin: 0 20px;
     font-family: 'Raleway', sans-serif; /* Ensure the font is imported */
+    color: var(--red);
 }
 
 .section-heading::before,
@@ -167,10 +183,17 @@ border-radius: var(--border-radius);
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     padding-top: 10px;
+    background-color: var(--header-bg-color);
+    color: var(--header-text-color);
     grid-template-areas: 
     "logo button"
     "menu menu"
     ;
+    background-color: var(--black);
+    padding: 5px;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
 }
 
 @media only screen and (min-width: 768px){
@@ -178,9 +201,15 @@ border-radius: var(--border-radius);
         grid-template-columns: auto 1fr auto;
         grid-template-areas: 
         "logo menu button"
+        
         ;
     }
 }
+
+.header a{
+    color: var(--gray-light);
+}
+
 
 .header__logo{
     grid-area: logo;
@@ -203,6 +232,7 @@ border-radius: var(--border-radius);
     grid-area: button;
     display: flex;
     justify-content: end;
+    color: var(--gray-light);
 }
 
 .header__button button{
@@ -215,11 +245,11 @@ border-radius: var(--border-radius);
     border-radius: var(--border-radius);
     font-size: var(--font-size-base);
     font-weight: 600;
-    color: var(--black);
+    color: var(--gray-light);
 }
 
 .header__button button:hover{
-    border: 2px solid var(--black);
+    border: 2px solid var(--gray-light);
 }
 
 .header__nav ul{
@@ -263,6 +293,7 @@ border-radius: var(--border-radius);
 .article__heading{
     margin-top: 4rem;
     font-weight: 400;
+    color: var(--orange);
 }
 
 .article-ul{
@@ -389,7 +420,7 @@ border-radius: var(--border-radius);
 }
 
 .header__nav .dropdown-content a {
-    color: var(--gray-light);
+    color: var(--header-bg-color);;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -451,9 +482,11 @@ border-radius: var(--border-radius);
     align-items: center;
     text-align: center;
     padding: 20px;
+    
 }
 .subscribe-container h2 {
     margin-bottom: 20px;
+    color: var(--pink);
 }
 
 .subscribe-container form {
@@ -483,6 +516,7 @@ border-radius: var(--border-radius);
 
 .subscribe-container .btn {
     padding: 10px 20px;
+    background-color: var(--pink);
 }
 
 /* The Modal (background) */
@@ -582,4 +616,4 @@ border-radius: var(--border-radius);
     color: var(--black);
 
 }
-
+}
