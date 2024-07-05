@@ -443,17 +443,28 @@ border-radius: var(--border-radius);
 
 /* CSS für die Subscribe-Seite */
 .subscribe-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     padding: 20px;
 }
+.subscribe-container h2 {
+    margin-bottom: 20px;
+}
 
 .subscribe-container form {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
 }
 
 .subscribe-container label {
-    display: block;
-    margin-top: 10px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
@@ -464,8 +475,49 @@ border-radius: var(--border-radius);
     width: 100%;
     max-width: 400px;
     box-sizing: border-box;
+
 }
 
 .subscribe-container .btn {
     padding: 10px 20px;
 }
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 500px;
+    
+}
+
+/* The Close Button */
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+

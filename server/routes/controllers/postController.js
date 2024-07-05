@@ -36,7 +36,8 @@ exports.getPosts = async (req, res) => {
             posts: posts,
             currentPage: page,
             nextPage: nextPage, 
-            prevPage: prevPage      
+            prevPage: prevPage,
+            showModal: true     
         });
     } catch (e) {
         res.status(500).send(e);
