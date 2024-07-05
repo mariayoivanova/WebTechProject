@@ -1,61 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <div class="centered-heading">
-    <h1 >Berlin is Calling</h1>
-</div>
+        <h1>Berlin is Calling</h1>
+    </div>
     <img src="/img/Berlin_is_calling.jpg" alt="Berlin is calling" class="image">
     <p><%= description %></p>
-</div>
 
     <div class="description">
         <p class="description_body">Explore Berlin’s dynamic fashion culture with our curated platform. Discover insightful articles, captivating photography, and seasonal pages that showcase the city’s ever-evolving style. Join our community of fashion enthusiasts and experience the pulse of Berlin’s vibrant fashion landscape firsthand. Whether you're seeking trends, designer profiles, or seasonal inspirations, immerse yourself in the creativity and innovation that define Berlin’s fashion identity. Welcome to Berlin Fashion Scene—where style meets culture in Europe’s fashion capital.</p>
     </div>
 
-   
-
     <section class="articles">
         <h2 class="articles__heading">Latest Posts</h2>
-
         <ul class="article-ul">
-
             <% if (posts && posts.length > 0) { %>
                 <% posts.forEach(post => { %>
-                <li>
-                    <a href="/post/<%= post._id %>">
-                        <span><%= post.title %></span>
-                        <% if (post.createdAt) { %>
-                            <span class="article-list__date"><%= new Date(post.createdAt).toDateString() %></span>
-                        <% } else { %>
-                            <span class="article-list__date">No date available</span>
-                        <% } %>
-                    </a>
-                </li>
-            <% }) %>
-
+                    <li>
+                        <a href="/post/<%= post._id %>">
+                            <span><%= post.title %></span>
+                            <% if (post.createdAt) { %>
+                                <span class="article-list__date"><%= new Date(post.createdAt).toDateString() %></span>
+                            <% } else { %>
+                                <span class="article-list__date">No date available</span>
+                            <% } %>
+                        </a>
+                    </li>
+                <% }) %>
             <% } else { %>
                 <li>No posts available</li>
             <% } %>
         </ul>
-        
-        <div class="pagination">
-       
 
-        <% if (nextPage) { %>
-            <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
-        <% } else { %>
-            <p>No more newer pages to display.</p>
+        <div class="pagination">
+            <% if (nextPage) { %>
+                <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
+            <% } else { %>
+                <p>No more newer pages to display.</p>
             <% } %> 
             
-        <% if (prevPage) { %>
-            <a href="/?page=<%= prevPage %>">Newer Posts</a>
-        <% } else { %>
-            <p>No more newer pages.</p>
+            <% if (prevPage) { %>
+                <a href="/?page=<%= prevPage %>">Newer Posts</a>
+            <% } else { %>
+                <p>No more newer pages.</p>
             <% } %>
         </div>
     </section>
+
+    <!-- Subscribe Modal -->
+    <div class="modal" id="subscribeModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <img src="/img/TAW-Berlin-23-KB-14.jpg.webp" alt="Your Image" class="subscribe-image">
+            <div class="subscribe-text">
+                <h2>Let's keep it Fashion in Berlin</h2>
+                <p>Sign up to get a dose of life & style in your inbox, PLUS get access to exclusive fashion & lifestyle content just for  subscribers!</p>
+                <form id="subscribeForm" action="/subscribe" method="POST">
+                    <input type="text" name="firstName" placeholder="First name" required>
+                    <input type="email" name="email" placeholder="Email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
 </body>
 </html>

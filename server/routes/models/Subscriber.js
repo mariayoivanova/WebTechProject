@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const subscriberSchema = new mongoose.Schema({
+const subscriberSchema = new Schema({
     firstName: {
         type: String,
         required: true
@@ -12,8 +13,11 @@ const subscriberSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true // Eindeutiger Index auf dem E-Mail-Feld
     }
-}, { timestamps: true });
+}, {
+    timestamps: true // Automatisch createdAt und updatedAt Felder hinzufügen
+});
 
-module.exports = mongoose.model('Subscriber', subscriberSchema);
+const Subscriber = mongoose.model('Subscriber', subscriberSchema);
+module.exports = Subscriber;
