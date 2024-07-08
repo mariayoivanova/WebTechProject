@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berlin Fashion Blog - Style Tips</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header >
+        <h1 class="centered-heading">Style Tips</h1>
+        <h3>Discover the latest trends and timeless classics in Berlin fashion.</h3>
+    </header>
+    <section class="style-tips">
+        <% styleTips.forEach(tip => { %>
+            <article class="tip">
+                <img src="<%= tip.image %>" alt="<%= tip.title %>">
+                <div class="text">
+                    <h2><%= tip.title %></h2>
+                    <p><%= tip.description %></p>
+                </div>
+            </article>
+        <% }); %>
+    </section>
+</body>
+</html>

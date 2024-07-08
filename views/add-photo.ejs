@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Photo - Berlin Fashion Blog</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1 class="centered-heading">Add New Photo</h1>
+    </header>
+    <section class="form-section">
+        <!-- Add Photo Form -->
+        <form action="/add-photo" method="POST">
+            <input type="text" name="title" placeholder="Title" required>
+            <select name="category" required>
+                <option value="">Select Category</option>
+                <option value="Spring/Summer">Spring/Summer</option>
+                <option value="Fall/Winter">Fall/Winter</option>
+            </select>
+            <input type="url" name="url" placeholder="Image URL" required>
+            <button type="submit">Add Photo</button>
+        </form>
+    </section>
+</body>
+</html>
