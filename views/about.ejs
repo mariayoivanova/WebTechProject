@@ -1,1 +1,33 @@
-<h1> About</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Berlin Fashion Blog</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1 class="centered-heading">About Us</h1>
+    </header>
+    <section class="about">
+        <div class="about-text">
+            <h2>Welcome to Berlin Fashion Blog!</h2>
+            <p>
+                At Berlin Fashion Blog, we celebrate the vibrant and eclectic fashion scene of Berlin. From avant-garde designers to street style influencers, our mission is to capture the essence of Berlin’s unique fashion culture.
+            </p>
+            <p>
+                Our blog is a platform where fashion enthusiasts can explore the latest trends, discover emerging designers, and get inspired by the creativity that defines Berlin. We believe in the power of fashion to express individuality and tell stories, and we are here to share those stories with you.
+            </p>
+            <p>
+                Whether you’re a local or a global visitor, our blog offers a window into the dynamic world of Berlin fashion. Join us on this stylish journey and immerse yourself in the heart of one of the world's most exciting fashion capitals.
+            </p>
+        </div>
+        <div class="about-images">
+            <% images.forEach(function(image) { %>
+                <img src="<%= image.src %>" alt="<%= image.alt %>">
+            <% }); %>
+        </div>
+    </section>
+</body>
+</html>

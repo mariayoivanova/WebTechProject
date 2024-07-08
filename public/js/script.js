@@ -77,3 +77,21 @@ document.addEventListener('DOMContentLoaded', function(){
   
   
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const formInputs = document.querySelectorAll('.form-group input, .form-group textarea');
+
+    formInputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            const label = input.closest('.form-group').querySelector('label');
+            label.classList.add('focused');
+        });
+
+        input.addEventListener('blur', () => {
+            if (!input.value) {
+                const label = input.closest('.form-group').querySelector('label');
+                label.classList.remove('focused');
+            }
+        });
+    });
+});

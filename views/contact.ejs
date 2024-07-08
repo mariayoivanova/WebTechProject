@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Berlin Fashion Blog</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1 class="centered-heading">Contact</h1>
+    </header>
+    <section class="contact">
+        <div class="contact-info">
+            <h2>We'd Love to Hear From You!</h2>
+            <p>
+                Have a question, feedback, or want to collaborate with us? Reach out and connect with the Berlin Fashion Blog team. Your thoughts and ideas are important to us, and we're here to help.
+            </p>
+            <p>
+                Email: <a href="mailto:info@berlinfashionblog.com">info@berlinfashionblog.com</a><br>
+                Phone: +49 123 456 7890
+            </p>
+            <p>
+                You can also follow us on social media for the latest updates and trends in Berlin fashion:
+            </p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/berlinfashionblog" target="_blank">Instagram</a> |
+                <a href="https://www.facebook.com/berlinfashionblog" target="_blank">Facebook</a> |
+                <a href="https://www.twitter.com/berlinfashionblog" target="_blank">Twitter</a>
+            </div>
+            <div class="contact-images">
+                <img src="/img/FashionInBerlin2jpg.jpg" alt="Fashion in Berlin">
+                <img src="/img/style3.webp" alt="Street Style in Berlin">
+                <img src="/img/FW.jpg" alt="Berlin Fashion Week">
+            </div>
+        </div>
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form action="/send-message" method="POST">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" required>
+                    <label for="name">Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <label for="message">Message</label>
+                </div>
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
+        </div>
+    </section>
+    <script src="/script.js"></script>
+</body>
+</html>
