@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fall/Winter Photos</title>
-    <link rel="stylesheet" href="/styles.css">
+    <title>Berlin Fashion Blog - Fall/Winter Photos</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <header>
         <h1 class="centered-heading">Fall/Winter Photos</h1>
+        <p>Experience the vibrant fashion scene in Berlin during the fall and winter seasons.</p>
+        <a href="/add-photo" class="add-photo-btn">Add New Photo</a>
     </header>
-    <section class="fall-winter">
-        <div class="photo-gallery">
-            <% photos.forEach(photo => { %>
-                <div class="photo-item">
-                    <img src="<%= photo.url %>" alt="Photo" class="image">
-                    <p><%= photo.description %></p>
+    <section class="photo-gallery">
+        <% photos.forEach(photo => { %>
+            <div class="photo-card">
+                <img src="<%= photo.url %>" alt="<%= photo.title %>">
+                <div class="photo-title"><%= photo.title %></div>
+                <div class="photo-actions">
+                    <a href="/edit-photo/<%= photo._id %>">Edit</a>
+                    <a href="/delete-photo/<%= photo._id %>" onclick="return confirm('Are you sure you want to delete this photo?')">Delete</a>
                 </div>
-            <% }); %>
-        </div>
-    </div>
+            </div>
+        <% }); %>
+    </section>
 </body>
 </html>

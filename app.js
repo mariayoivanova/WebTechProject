@@ -51,6 +51,7 @@ const express = require('express');
 const path = require('path');
 const expressLayout = require('express-ejs-layouts');
 const connectDB = require('./server/routes/config/db');
+const multer = require('multer');
 
 const app = express();
 const PORT = process.env.PORT || 5001;  // Korrigiere die PORT-Variable
@@ -73,11 +74,11 @@ app.set('views', path.join(__dirname, 'views'));
 const postRoutes = require('./server/routes/postRoutes'); // Importiere den Router für CRUD-Operationen
 const adminRoutes = require('./server/routes/adminRoutes');
 const subscribeRoutes = require('./server/routes/subscribeRoutes');
-
-app.use('/', postRoutes); 
 const photoRoutes = require('./server/routes/photoRoutes');
 
-app.use('/', postRoutes); // Verwende den importierten Router
+app.use('/', postRoutes); 
+
+//app.use('/', postRoutes); // Verwende den importierten Router
 
 app.use('/admin', adminRoutes);
 app.use('/', subscribeRoutes);
@@ -102,6 +103,30 @@ app.post('/send-message', (req, res) => {
   console.log(`Message from ${name} (${email}): ${message}`);
   res.redirect('/contact');
 });
+
+const styleTips = [
+  {
+      title: "Embrace the Street Style",
+      description: "Berlin's street style is all about individuality and creativity. Mix and match bold prints with vintage finds to create a unique look.",
+      image: "/img/printVintage.webp"
+  },
+  {
+      title: "Minimalist Elegance",
+      description: "Opt for minimalist designs and neutral colors. Berliners love a sleek, understated look that is both chic and comfortable.",
+      image: "/img/minimal1.jpg"
+  },
+  {
+      title: "Layering Like a Pro",
+      description: "Layering is key in Berlin's unpredictable weather. Combine different textures and lengths to stay warm and stylish.",
+      image: "/img/layering_art2.webp"
+  }
+];
+
+// Route to render the style tips page
+app.get('/style-tips', (req, res) => {
+  res.render('fashion/style-tips', { styleTips });
+});
+
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
