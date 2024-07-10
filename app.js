@@ -75,6 +75,8 @@ const postRoutes = require('./server/routes/postRoutes'); // Importiere den Rout
 const adminRoutes = require('./server/routes/adminRoutes');
 const subscribeRoutes = require('./server/routes/subscribeRoutes');
 const photoRoutes = require('./server/routes/photoRoutes');
+const commentRoutes = require('./server/routes/commentRoutes');
+
 
 app.use('/', postRoutes); 
 
@@ -83,6 +85,7 @@ app.use('/', postRoutes);
 app.use('/admin', adminRoutes);
 app.use('/', subscribeRoutes);
 app.use('/', photoRoutes);
+app.use('/', commentRoutes);
 
 app.get('/about', (req, res) => {
   const images = [
@@ -126,6 +129,7 @@ const styleTips = [
 app.get('/style-tips', (req, res) => {
   res.render('fashion/style-tips', { styleTips });
 });
+
 
 
 app.listen(PORT, () => {
