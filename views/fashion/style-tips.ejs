@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <header >
+    <header>
         <h1 class="centered-heading">Style Tips</h1>
         <h3>Discover the latest trends and timeless classics in Berlin fashion.</h3>
     </header>
@@ -22,5 +22,24 @@
             </article>
         <% }); %>
     </section>
+
+    <div class="comments-section">
+        <h3>Post a Comment</h3>
+        <h4>Do you have unique style tips or fashion advice? We’d love for you to share them here! Whether you've faced fashion challenges or have exciting outfit experiences in Berlin, we’re excited to hear from you. Join our community of fashion enthusiasts and let’s celebrate Berlin's eclectic style together. Don’t hesitate to express yourself – write what you want, and let’s inspire each other!</h4>
+        <form id="commentForm">
+            <label for="commentName">Name:</label>
+            <input type="text" id="commentName" name="name" required>
+            
+            <label for="commentText">Comment:</label>
+            <textarea id="commentText" name="text" required></textarea>
+            
+            <button type="submit">Publish</button>
+        </form>
+        
+        <div id="commentsList"></div>
+    </div>
+
+    <script src="/js/script.js"></script>
+
 </body>
 </html>
