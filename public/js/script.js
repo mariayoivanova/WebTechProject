@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM fully loaded and parsed");
-
-    // Modal functionality
+    // Abonnement-Modal
     const modal = document.getElementById("subscribeModal");
     const closeBtn = document.getElementsByClassName("close-btn")[0];
 
@@ -23,23 +21,24 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
+    // Abonnement-Formular
     const subscribeForm = document.getElementById("subscribeForm");
     if (subscribeForm) {
         subscribeForm.addEventListener('submit', function(event) {
             event.preventDefault();
             const formData = new FormData(subscribeForm);
             const firstName = formData.get('firstName');
+            const lastName = formData.get('lastName'); 
             const email = formData.get('email');
 
             fetch('/subscribe', {
                 method: 'POST',
-                body: JSON.stringify({ firstName, email }),
+                body: JSON.stringify({ firstName, lastName, email }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then(response => {
-                return response.json();
-            }).then(data => {
+            }).then(response => response.json())
+            .then(data => {
                 console.log('Response from server:', data);
                 if (data.success) {
                     sessionStorage.setItem('subscribed', 'true');
@@ -55,15 +54,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 subscribeForm.innerHTML = '<p>There was an error, please try again.</p>';
             });
         });
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(String(email).toLowerCase());
+        }
     }
 
+    // Suchleiste
     const allButtons = document.querySelectorAll('.searchBtn');
     const searchBar = document.querySelector('.searchBar');
     const searchInput = document.getElementById('searchInput');
     const searchClose = document.getElementById('searchClose');
 
     if (allButtons && searchBar && searchInput && searchClose) {
-        for (var i = 0; i < allButtons.length; i++) {
+        for (let i = 0; i < allButtons.length; i++) {
             allButtons[i].addEventListener('click', function() {
                 searchBar.style.visibility = 'visible';
                 searchBar.classList.add('open');
@@ -79,16 +83,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Kommentarbereich
     const commentForm = document.getElementById('commentForm');
     const commentsList = document.getElementById('commentsList');
 
     if (commentForm && commentsList) {
         commentForm.addEventListener('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault();  // Verhindert das Standardverhalten des Formulars
+
             const commentName = document.getElementById('commentName').value;
             const commentText = document.getElementById('commentText').value;
-
-            console.log("Submitting comment:", { name: commentName, text: commentText });
 
             fetch('/comments', {
                 method: 'POST',
@@ -96,27 +100,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then(response => response.json())
-              .then(data => {
-                  console.log('Response from server:', data);
-                  if (data.success) {
-                      loadComments();
-                      commentForm.reset();
-                  } else {
-                      alert('Failed to post comment');
-                  }
-              }).catch(error => {
-                  console.error('Error:', error);
-              });
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.comment) {
+                    // Direkt den neuen Kommentar zur Liste hinzufügen
+                    const commentDiv = document.createElement('div');
+                    commentDiv.classList.add('comment');
+                    commentDiv.innerHTML = `
+                        <p class="comment-name"><strong>${data.comment.name}</strong></p>
+                        <p class="comment-text">${data.comment.text}</p>
+                        <button class="edit-btn" data-id="${data.comment._id}">Edit</button>
+                        <button class="delete-btn" data-id="${data.comment._id}">Delete</button>
+                    `;
+                    commentsList.prepend(commentDiv);  // Fügt den neuen Kommentar oben in der Liste hinzu
+                    commentForm.reset();
+                } else {
+                    alert('Kommentar konnte nicht gepostet werden');
+                }
+            })
+            .catch(error => {
+                console.error('Fehler beim Posten des Kommentars:', error);
+                alert('Ein Fehler ist beim Posten des Kommentars aufgetreten');
+            });
         });
 
         function loadComments() {
-            console.log("Loading comments...");
             fetch('/comments')
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Comments loaded:', data);
-                    commentsList.innerHTML = ''; // Clear the list before adding new comments
+                    commentsList.innerHTML = '';
                     data.comments.forEach(comment => {
                         const commentDiv = document.createElement('div');
                         commentDiv.classList.add('comment');
@@ -128,52 +141,57 @@ document.addEventListener('DOMContentLoaded', function() {
                         `;
                         commentsList.appendChild(commentDiv);
                     });
-                }).catch(error => {
-                    console.error('Error loading comments:', error);
+                })
+                .catch(error => {
+                    console.error('Fehler beim Laden der Kommentare:', error);
                 });
         }
 
         commentsList.addEventListener('click', function(event) {
             if (event.target.classList.contains('edit-btn')) {
                 const commentId = event.target.getAttribute('data-id');
-                const newText = prompt('Edit your comment:');
+                const newText = prompt('Bearbeiten Sie Ihren Kommentar:');
                 if (newText) {
-                    console.log("Editing comment:", commentId, newText);
                     fetch(`/comments/${commentId}`, {
                         method: 'PUT',
                         body: JSON.stringify({ text: newText }),
                         headers: {
                             'Content-Type': 'application/json'
                         }
-                    }).then(response => response.json())
-                      .then(data => {
-                          if (data.success) {
-                              loadComments();
-                          } else {
-                              alert('Failed to edit comment');
-                          }
-                      }).catch(error => {
-                          console.error('Error editing comment:', error);
-                      });
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const commentDiv = event.target.parentElement;
+                            commentDiv.querySelector('.comment-text').innerText = newText;
+                        } else {
+                            alert('Kommentar konnte nicht bearbeitet werden');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Fehler beim Bearbeiten des Kommentars:', error);
+                    });
                 }
             } else if (event.target.classList.contains('delete-btn')) {
                 const commentId = event.target.getAttribute('data-id');
-                console.log("Deleting comment:", commentId);
                 fetch(`/comments/${commentId}`, {
                     method: 'DELETE'
-                }).then(response => response.json())
-                  .then(data => {
-                      if (data.success) {
-                          loadComments();
-                      } else {
-                          alert('Failed to delete comment');
-                      }
-                  }).catch(error => {
-                      console.error('Error deleting comment:', error);
-                  });
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const commentDiv = event.target.parentElement;
+                        commentDiv.remove();
+                    } else {
+                        alert('Kommentar konnte nicht gelöscht werden');
+                    }
+                })
+                .catch(error => {
+                    console.error('Fehler beim Löschen des Kommentars:', error);
+                });
             }
         });
 
-        loadComments(); // Load comments when the page loads
+        loadComments();  // Kommentare beim Laden der Seite anzeigen
     }
 });
