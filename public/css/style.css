@@ -590,7 +590,7 @@ border-radius: var(--border-radius);
 }
 
 .close-btn {
-    color: #aaa;
+    color: #030303;
     font-size: 28px;
     font-weight: bold;
     position: absolute;
@@ -604,6 +604,10 @@ border-radius: var(--border-radius);
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+/* Optional: Verbessern Sie die Positionierung des Modals */
+.modal-content {
+    position: relative;
 }
 
 
@@ -930,6 +934,96 @@ section.contact {
     transform: translateY(-10px);
 }
 /* comment  style typ*/
+.comments-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--post-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--post-shadow);
+}
+
+.comments-section h3 {
+    font-size: var(--font-size-lg);
+    color: var(--orange);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.comments-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comments-section label {
+    font-size: var(--font-size-base);
+    color: var(--black);
+}
+
+.comments-section input,
+.comments-section textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: var(--font-size-base);
+    border: 1px solid var(--gray-light);
+    border-radius: var(--border-radius);
+}
+
+.comments-section button {
+    padding: 10px;
+    font-size: var(--font-size-base);
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+.comments-section button:hover {
+    background-color: var(--btn-primary-hover-bg);
+}
+
+.comment {
+    padding: 15px;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.comment .comment-name {
+    font-weight: bold;
+    color: var(--black);
+}
+
+.comment .comment-text {
+    margin: 10px 0;
+    color: var(--gray);
+}
+
+.comment .edit-btn,
+.comment .delete-btn {
+    background-color: var(--black);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.comment .delete-btn {
+    background-color: var(--red);
+}
+
+.comment .edit-btn:hover,
+.comment .delete-btn:hover {
+    background-color: var(--orange);
+}
+
+
+.comments-section h3 {
+    color: #fd7e14;
+}
+
 
 
 /* Photo Gallery */
