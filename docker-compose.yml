@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: mongodb+srv://saratahmasebi1998:19981998sara@cluster0.y0yr5vd.mongodb.net/mydatabase
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
