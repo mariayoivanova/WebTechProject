@@ -13,7 +13,8 @@ const subscriberSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true // Eindeutiger Index auf dem E-Mail-Feld
+        unique: true ,
+        lowercase: true 
     }
 }, {
     timestamps: true // Automatisch createdAt und updatedAt Felder hinzufügen

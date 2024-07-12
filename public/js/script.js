@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const formData = new FormData(subscribeForm);
                     const firstName = formData.get('firstName');
                     const lastName = formData.get('lastName');
-                    const email = formData.get('email');
+                    const email = formData.get('email').toLowerCase(); 
 
                     fetch('/subscribe', {
                         method: 'POST',
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(mainSubscribeForm);
             const firstName = formData.get('firstName');
             const lastName = formData.get('lastName');
-            const email = formData.get('email');
+            const email = formData.get('email').toLowerCase(); 
 
             fetch('/subscribe', {
                 method: 'POST',
