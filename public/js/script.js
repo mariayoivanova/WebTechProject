@@ -1,57 +1,60 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if we are on the home page
+    // Überprüfen, ob wir uns auf der Startseite befinden
     if (window.location.pathname === '/') {
-        // Abonnement-Modal
+        // Subscribe Modal Logic
         const modal = document.getElementById("subscribeModal");
         const closeBtn = document.getElementsByClassName("close-btn")[0];
         const subscribeMessage = document.getElementById("subscribeMessage");
 
-        setTimeout(function() {
-            modal.style.display = "block";
-        }, 1000);
+        // Zeigt das Modal nach einer Sekunde an
+        if (modal) {
+            setTimeout(function() {
+                modal.style.display = "block";
+            }, 1000);
 
-        closeBtn.onclick = function() {
-            modal.style.display = "none";
-        };
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
+            closeBtn.onclick = function() {
                 modal.style.display = "none";
-            }
-        };
+            };
 
-        const subscribeForm = document.getElementById("subscribeForm");
-        if (subscribeForm) {
-            subscribeForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(subscribeForm);
-                const firstName = formData.get('firstName');
-                const lastName = formData.get('lastName');
-                const email = formData.get('email');
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
 
-                fetch('/subscribe', {
-                    method: 'POST',
-                    body: JSON.stringify({ firstName, lastName, email }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(response => response.json())
-                .then(data => {
-                    subscribeMessage.textContent = data.message;
-                    subscribeMessage.style.display = 'block';
-                    if (data.success) {
-                        sessionStorage.setItem('subscribed', 'true');
-                        subscribeForm.reset();
-                        setTimeout(() => {
-                            modal.style.display = "none";
-                        }, 2000);
-                    }
-                }).catch(error => {
-                    console.error('Error:', error);
-                    subscribeMessage.textContent = 'There was an error, please try again.';
-                    subscribeMessage.style.display = 'block';
+            const subscribeForm = document.getElementById("subscribeForm");
+            if (subscribeForm) {
+                subscribeForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(subscribeForm);
+                    const firstName = formData.get('firstName');
+                    const lastName = formData.get('lastName');
+                    const email = formData.get('email');
+
+                    fetch('/subscribe', {
+                        method: 'POST',
+                        body: JSON.stringify({ firstName, lastName, email }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => response.json())
+                    .then(data => {
+                        subscribeMessage.textContent = data.message;
+                        subscribeMessage.style.display = 'block';
+                        if (data.success) {
+                            subscribeForm.reset();
+                            subscribeForm.style.display = 'none';  // Eingabefelder ausblenden
+                            setTimeout(() => {
+                                modal.style.display = "none";
+                            }, 2000);
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        subscribeMessage.textContent = 'There was an error, please try again.';
+                        subscribeMessage.style.display = 'block';
+                    });
                 });
-            });
+            }
         }
     }
 
@@ -79,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 mainSubscribeMessage.style.display = 'block';
                 if (data.success) {
                     mainSubscribeForm.reset();
+                    mainSubscribeForm.style.display = 'none';  // Eingabefelder ausblenden
                 }
             }).catch(error => {
                 console.error('Error:', error);
@@ -87,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-
+    
     // Suchleiste
     const allButtons = document.querySelectorAll('.searchBtn');
     const searchBar = document.querySelector('.searchBar');
