@@ -1,8 +1,8 @@
 const express = require('express');
-const subscribeController = require('./controllers/subscribeController');  // Corrected path
 const router = express.Router();
+const subscribeController = require('./controllers/subscribeController');  // Passe den Pfad an
 
-//router.get('/subscribe', subscribeController.showSubscribePage);
 router.post('/subscribe', subscribeController.handleSubscribe);
+router.get('/subscribe', subscribeController.showSubscribePage);
 
 module.exports = router;
