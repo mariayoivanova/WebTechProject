@@ -9,6 +9,7 @@ Welcome to the **Berlin Fashion Blog**! This web application is a platform where
 ## Features
 
 - **Articles**: Browse and read articles about the latest fashion trends and updates.
+- **Search**: Search key words of the articles or of the aricles titles
 - **Photo Galleries**:
   - **Spring/Summer**: Explore the latest outfits for the spring and summer seasons.
   - **Fall/Winter**: Discover trendy outfits for the fall and winter seasons.
