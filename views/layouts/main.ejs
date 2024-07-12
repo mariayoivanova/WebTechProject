@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title><%= locals.title %></title>
+    <title><%= locals.titel %></title>
     <meta name="description" content="<%= locals.description %>">
     <link rel="stylesheet" href="/css/style.css">
     <script type="text/javascript" defer src="/js/script.js"></script>
@@ -19,19 +19,23 @@
         </main>
         <%- include('../partials/footer.ejs') %>
     </div>
-    <% if (typeof showModal !== 'undefined' && showModal !== false) { %>
+
+    <!-- Subscribe Modal -->
     <div id="subscribeModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h2>Subscribe to Our Newsletter</h2>
-            <form id="subscribeForm">
-                <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
-                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
-                <input type="email" id="email" name="email" placeholder="Email" required>
+            <form action="/subscribe" method="POST">
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstName" required>
+                <label for="lastName">Last Name</label>
+                <input type="text" name="lastName" required>
+                <label for="email">Email</label>
+                <input type="email" name="email" required>
                 <button type="submit">Subscribe</button>
+                <p id="subscribeMessage" style="display: none;"></p>
             </form>
         </div>
     </div>
-    <% } %>    
 </body>
 </html>

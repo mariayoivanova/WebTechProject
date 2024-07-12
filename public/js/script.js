@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Abonnement-Modal
-    const modal = document.getElementById("subscribeModal");
-    const closeBtn = document.getElementsByClassName("close-btn")[0];
+    // Check if we are on the home page
+    if (window.location.pathname === '/') {
+        // Abonnement-Modal
+        const modal = document.getElementById("subscribeModal");
+        const closeBtn = document.getElementsByClassName("close-btn")[0];
+        const subscribeMessage = document.getElementById("subscribeMessage");
 
-    if (modal && closeBtn) {
-        if (!sessionStorage.getItem('subscribed')) {
-            setTimeout(function() {
-                modal.style.display = "block";
-            }, 1000);
-        }
+        setTimeout(function() {
+            modal.style.display = "block";
+        }, 1000);
 
         closeBtn.onclick = function() {
             modal.style.display = "none";
@@ -19,16 +19,52 @@ document.addEventListener('DOMContentLoaded', function() {
                 modal.style.display = "none";
             }
         };
+
+        const subscribeForm = document.getElementById("subscribeForm");
+        if (subscribeForm) {
+            subscribeForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(subscribeForm);
+                const firstName = formData.get('firstName');
+                const lastName = formData.get('lastName');
+                const email = formData.get('email');
+
+                fetch('/subscribe', {
+                    method: 'POST',
+                    body: JSON.stringify({ firstName, lastName, email }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => response.json())
+                .then(data => {
+                    subscribeMessage.textContent = data.message;
+                    subscribeMessage.style.display = 'block';
+                    if (data.success) {
+                        sessionStorage.setItem('subscribed', 'true');
+                        subscribeForm.reset();
+                        setTimeout(() => {
+                            modal.style.display = "none";
+                        }, 2000);
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    subscribeMessage.textContent = 'There was an error, please try again.';
+                    subscribeMessage.style.display = 'block';
+                });
+            });
+        }
     }
 
-    // Abonnement-Formular
-    const subscribeForm = document.getElementById("subscribeForm");
-    if (subscribeForm) {
-        subscribeForm.addEventListener('submit', function(event) {
+    // Subscribe Page Logic
+    const mainSubscribeForm = document.getElementById("mainSubscribeForm");
+    const mainSubscribeMessage = document.getElementById("mainSubscribeMessage");
+
+    if (mainSubscribeForm) {
+        mainSubscribeForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            const formData = new FormData(subscribeForm);
+            const formData = new FormData(mainSubscribeForm);
             const firstName = formData.get('firstName');
-            const lastName = formData.get('lastName'); 
+            const lastName = formData.get('lastName');
             const email = formData.get('email');
 
             fetch('/subscribe', {
@@ -39,25 +75,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }).then(response => response.json())
             .then(data => {
-                console.log('Response from server:', data);
+                mainSubscribeMessage.textContent = data.message;
+                mainSubscribeMessage.style.display = 'block';
                 if (data.success) {
-                    sessionStorage.setItem('subscribed', 'true');
-                    subscribeForm.innerHTML = '<p>Thank you for subscribing!</p>';
-                    setTimeout(() => {
-                        modal.style.display = "none";
-                    }, 2000);
-                } else {
-                    subscribeForm.innerHTML = '<p>' + data.message + '</p>';
+                    mainSubscribeForm.reset();
                 }
             }).catch(error => {
                 console.error('Error:', error);
-                subscribeForm.innerHTML = '<p>There was an error, please try again.</p>';
+                mainSubscribeMessage.textContent = 'There was an error, please try again.';
+                mainSubscribeMessage.style.display = 'block';
             });
         });
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(String(email).toLowerCase());
-        }
     }
 
     // Suchleiste
